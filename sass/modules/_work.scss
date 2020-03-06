@@ -1,0 +1,38 @@
+.workCon {padding: 0 15px;}
+
+.work { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    .user-panel {
+        flex: 0 1 100%;
+        margin-bottom: 60px;
+
+        .u-faceimg { max-width: 100%; border: 0.8px solid $grey; }
+
+        h1 { 
+            font-size: 22px; 
+            font-weight: 600; 
+            margin: 25px 0 12px 0;
+        }
+        h3 { font-size: 15px; font-weight:400; margin: 0;}
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .user-panel {
+        flex: 0 1 366px !important;
+
+        .u-faceimg { max-width: 366px; }
+
+        // h1 { 
+        //     font-size: 25px; 
+        //     font-weight: bold; 
+        //     margin: 25px 0 12px 0;
+        // }
+        // h3 { font-size: 18px; font-weight: 500; margin: 0;}
+    }
+}

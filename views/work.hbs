@@ -1,0 +1,21 @@
+<section class="workCon">
+    <div class="work">
+        <!-- loop through all our team members and put their info on the page -->
+
+        {{#each works}}
+
+        <div class="user-panel">
+                <a href="/work/{{ID}}">
+                    <img src="images/{{HeaderImg}}" alt="hearderimg" class="u-faceimg">
+                </a>
+
+            <h1>{{FaceTitle}}</h1>
+            <h3>{{category}}</h3>
+          
+
+        </div>
+
+        {{/each}}
+        
+    </div>
+</section>

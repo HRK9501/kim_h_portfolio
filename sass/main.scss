@@ -1,0 +1,23 @@
+@import '_vars';
+@import 'modules/_navbar';
+@import 'modules/_users';
+@import 'modules/_footer';
+@import 'modules/_homepage';
+@import 'modules/_work';
+@import 'modules/_project';
+@import 'modules/_errors';
+@import 'modules/_contact';
+@import 'modules/_about';
+
+
+
+.hidden {display: none;}
+
+body {
+    background-color: #fff; 
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+h1, h2, h3, p {color: $grey}

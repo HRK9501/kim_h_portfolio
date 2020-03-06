@@ -1,0 +1,19 @@
+<section class="projectCon">
+
+    <img src="/images/{{HeaderImg}}" alt="face img" class="promain">
+    <div class="projectbody">
+
+        <h1>{{ProjectTitle}}</h1>
+        <p>{{ProjectText}}</p>
+        {{#if BodyVideo}}
+        <video controls>
+            <source src="/images/{{BodyVideo}}" type="video/mp4">
+        </video>
+        {{/if}}
+        {{#each images as |item|}}
+        <img src="/images/{{this}}" alt="projects img" class="proimg">
+        {{/each}}
+
+    </div>
+
+</section>
