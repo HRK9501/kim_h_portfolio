@@ -2,79 +2,103 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
+const connect = require('../utils/sql');
 
-const sql = require('../utils/sql');
+
 
 /* GET home page. */
 router.get('/', (req, res) => {
 
-  console.log('at the main route')
+    console.log('at the main route')
 
-  res.render('index', { title: 'my other page', layout: 'home' });
+    res.render('index', { title: 'my other page', layout: 'home' });
 });
 
 
-router.get('/about', (req, res) => {
 
+router.get('/about', (req, res) => {
   console.log('at the about route')
 
   res.render('about');
 });
 
 
-
-// router.get('/', (req, res) => {
-
-//   console.log('at the home route')
-
-//   res.render('home');
-// });
-
-
 router.get('/work', (req, res, next) => {
-  // should really get the user data here and then fetch it thru, but let's try this asynchronously
-  console.log('at the work route');
+  connect.getConnection((err, connection) => {
+    if (err) { return console.log(err.message); }
+  
+    let query = `SELECT ID, HeaderImg, FaceTitle, category FROM tbl_project`;
+  
+    connect.query(query, (err, result) => {
+      connection.release();
 
-  let query = `SELECT ID, HeaderImg, FaceTitle, category FROM tbl_project`;
+      if (err) {return console.log(err.message);}
 
-  sql.query(query, (err, result) => {
-    if (err) { throw err; console.log(err); }
-
-    console.log(result); // should see objects wrapped in an array
-
-    // render the home view with dynamic data
-    res.render('work', { works: result });
-  })
+      console.log(result);
+  
+      res.render('work', { works: result });
+    });
+  });
 });
 
 
-router.get('/work/:id', (req, res) => {
-
-  console.log('at the project route');
-  console.log(req.params);
 
 
-  let query = `SELECT HeaderImg, ProjectTitle, ProjectText, BodyVideo, BodyImg FROM tbl_project WHERE ID = "${req.params.id}"`;
 
-  sql.query(query, (err, result) => {
-    if (err) { throw err; console.log(err); }
+router.get('/work/:FaceID', (req, res) => {
+  connect.getConnection((err, connection) =>{
+    if (err) { return console.log(err.message); }
+  
+    let query = `SELECT HeaderImg, ProjectTitle, ProjectText, BodyVideo, BodyImg FROM tbl_project WHERE ID = "${req.params.FaceID}"`;
 
-    console.log(result);
+    connect.query(query, (err, result) => {
+      connection.release();
+
+      if (err) {return console.log(err.message);}
+
+      console.log(result);
+
+      result[0].images = result[0].BodyImg.split(",").map(function (item) {
+        item = item.trim();
+  
+        return item;
+      })
+      res.render('project', result[0]);
+    });
+  });    
+});    
 
 
-    result[0].images = result[0].BodyImg.split(",").map(function (item) {
-      item = item.trim();
 
-      return item;
-    })
-    res.render('project', result[0]);
-  })
-});
+
+
+
+
+
+
 
 
 
 
 router.get('/contact', (req, res) => {
+  connect.getConnection((err, connection) =>{
+    if (err) { return console.log(err.message); }
+  
+    let query = `... quert goes here.`;
+  
+    connect.query(query, (err, rows) => {
+      connection.release();
+  
+      if (err) {
+        return console.log(err.message);
+      }
+  
+      console.log(rows);
+  
+      res.render('page', {data: rows});
+    })
+  })
+  
 
   console.log('at the contact route')
 

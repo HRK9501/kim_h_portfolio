@@ -16,7 +16,13 @@
     a {
         text-decoration: none;
         margin-left: 30px;
+        font-size: 18px;
+        font-weight: 600;
         color: $main-color;
+    }
+
+    a:hover {
+        color: $orange;
     }
 
     ul {display: flex;}
@@ -40,6 +46,6 @@
         width: 55px;
     }
     .headerCon {
-        margin: 20px 30px 30px 30px;
+        margin: 20px 30px;
     }
 }
